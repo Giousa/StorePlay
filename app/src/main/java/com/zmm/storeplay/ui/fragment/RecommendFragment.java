@@ -12,14 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.zmm.storeplay.AppApplication;
 import com.zmm.storeplay.R;
 import com.zmm.storeplay.bean.AppInfo;
-import com.zmm.storeplay.presenter.RecomendPresenter;
+import com.zmm.storeplay.di.component.AppComponent;
+import com.zmm.storeplay.di.component.DaggerRecommendComponent;
+import com.zmm.storeplay.di.module.RecommendModule;
+import com.zmm.storeplay.presenter.RecommendPresenter;
 import com.zmm.storeplay.presenter.contract.RecomendContract;
 import com.zmm.storeplay.ui.adapter.RecomendAppAdatper;
 import com.zmm.storeplay.ui.decoration.DividerItemDecoration;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,11 +39,14 @@ public class RecommendFragment extends Fragment implements RecomendContract.View
     RecyclerView mRecyclerView;
     Unbinder unbinder;
 
+
     private RecomendAppAdatper mRecomendAppAdatper;
 
-    private ProgressDialog mProgressDialog;
+    @Inject
+    ProgressDialog mProgressDialog;
 
-    private RecomendPresenter mRecomendPresenter;
+    @Inject
+    RecommendPresenter mRecommendPresenter;
 
     @Nullable
     @Override
@@ -47,11 +56,17 @@ public class RecommendFragment extends Fragment implements RecomendContract.View
         View view = inflater.inflate(R.layout.fragment_recomend, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        mProgressDialog = new ProgressDialog(getActivity());
+//        mProgressDialog = new ProgressDialog(getActivity());
+//
+//        mRecommendPresenter = new RecommendPresenter(this);
 
-        mRecomendPresenter = new RecomendPresenter(this);
+        DaggerRecommendComponent.builder()
+                .recommendModule(new RecommendModule(this))
+                .appComponent(((AppApplication)(this.getActivity().getApplication())).getAppComponent())
+                .build()
+                .inject(this);
 
-        mRecomendPresenter.requestDatas();
+        mRecommendPresenter.requestDatas();
 
 
         return view;

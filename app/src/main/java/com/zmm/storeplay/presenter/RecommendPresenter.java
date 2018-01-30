@@ -7,6 +7,8 @@ import com.zmm.storeplay.presenter.contract.RecomendContract;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,21 +20,26 @@ import retrofit2.Response;
  * Time:下午5:57
  */
 
-public class RecomendPresenter implements RecomendContract.Presenter {
+public class RecommendPresenter implements RecomendContract.Presenter {
 
 
     private RecomendContract.View mView;
 
-    public RecomendPresenter(RecomendContract.View view) {
+
+    private RecommendModel mRecommendModel;
+
+
+    public RecommendPresenter(RecommendModel recommendModel,RecomendContract.View view) {
         mView = view;
+        mRecommendModel = recommendModel;
     }
 
     @Override
     public void requestDatas() {
 
         mView.showLoading();
-        RecommendModel recommendModel = new RecommendModel();
-        recommendModel.getApps(new Callback<PageBean<AppInfo>>() {
+
+        mRecommendModel.getApps(new Callback<PageBean<AppInfo>>() {
             @Override
             public void onResponse(Call<PageBean<AppInfo>> call, Response<PageBean<AppInfo>> response) {
                 if(response != null){
