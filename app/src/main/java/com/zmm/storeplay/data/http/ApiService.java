@@ -1,4 +1,4 @@
-package com.zmm.storeplay.http;
+package com.zmm.storeplay.data.http;
 
 import com.zmm.storeplay.bean.AppInfo;
 import com.zmm.storeplay.bean.PageBean;
