@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.zmm.storeplay.AppApplication;
 import com.zmm.storeplay.R;
 import com.zmm.storeplay.bean.AppInfo;
+import com.zmm.storeplay.di.component.AppComponent;
 import com.zmm.storeplay.di.component.DaggerRecommendComponent;
 import com.zmm.storeplay.di.module.RecommendModule;
 import com.zmm.storeplay.presenter.RecommendPresenter;
@@ -30,13 +31,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class RecommendFragment extends Fragment implements RecomendContract.View{
+public class RecommendFragment extends BaseFragment<RecommendPresenter> implements RecomendContract.View{
 
-    private final String TAG = RecommendFragment.class.getSimpleName();
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
-    Unbinder unbinder;
+
 
 
     private RecomendAppAdatper mRecomendAppAdatper;
@@ -44,29 +44,23 @@ public class RecommendFragment extends Fragment implements RecomendContract.View
     @Inject
     ProgressDialog mProgressDialog;
 
-    @Inject
-    RecommendPresenter mRecommendPresenter;
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected int setLayout() {
+        return R.layout.fragment_recomend;
+    }
 
-
-        View view = inflater.inflate(R.layout.fragment_recomend, container, false);
-        unbinder = ButterKnife.bind(this, view);
-
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
         DaggerRecommendComponent.builder()
                 .recommendModule(new RecommendModule(this))
-                .appComponent(((AppApplication)(this.getActivity().getApplication())).getAppComponent())
+                .appComponent(appComponent)
                 .build()
                 .inject(this);
+    }
 
-        mRecommendPresenter.requestDatas();
-
-
-        return view;
-
-
+    @Override
+    protected void init() {
+        mPresenter.requestDatas();
     }
 
 
@@ -84,12 +78,6 @@ public class RecommendFragment extends Fragment implements RecomendContract.View
 
         mRecyclerView.setAdapter(mRecomendAppAdatper);
 
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 
     @Override
