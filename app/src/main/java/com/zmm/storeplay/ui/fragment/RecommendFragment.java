@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.zmm.storeplay.AppApplication;
 import com.zmm.storeplay.R;
 import com.zmm.storeplay.bean.AppInfo;
-import com.zmm.storeplay.di.component.AppComponent;
 import com.zmm.storeplay.di.component.DaggerRecommendComponent;
 import com.zmm.storeplay.di.module.RecommendModule;
 import com.zmm.storeplay.presenter.RecommendPresenter;
@@ -55,10 +54,6 @@ public class RecommendFragment extends Fragment implements RecomendContract.View
 
         View view = inflater.inflate(R.layout.fragment_recomend, container, false);
         unbinder = ButterKnife.bind(this, view);
-
-//        mProgressDialog = new ProgressDialog(getActivity());
-//
-//        mRecommendPresenter = new RecommendPresenter(this);
 
         DaggerRecommendComponent.builder()
                 .recommendModule(new RecommendModule(this))

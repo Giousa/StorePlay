@@ -13,12 +13,13 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.zmm.storeplay.R;
+import com.zmm.storeplay.di.component.AppComponent;
 import com.zmm.storeplay.ui.adapter.ViewPagerAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
@@ -31,17 +32,22 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.view_page)
     ViewPager mViewPage;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+    protected int setLayout() {
+        return R.layout.activity_main;
+    }
 
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
 
+    }
+
+    @Override
+    protected void init() {
         initDrawerLayout();
 
         initTabLayout();
-
     }
 
     private void initDrawerLayout() {
