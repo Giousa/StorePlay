@@ -20,26 +20,20 @@ import retrofit2.Response;
  * Time:下午5:57
  */
 
-public class RecommendPresenter implements RecomendContract.Presenter {
+public class RecommendPresenter extends BasePresenter<RecommendModel,RecomendContract.View> {
 
 
-    private RecomendContract.View mView;
-
-
-    private RecommendModel mRecommendModel;
-
-
-    public RecommendPresenter(RecommendModel recommendModel,RecomendContract.View view) {
-        mView = view;
-        mRecommendModel = recommendModel;
+    public RecommendPresenter(RecommendModel model, RecomendContract.View view) {
+        super(model, view);
     }
 
-    @Override
+
+
     public void requestDatas() {
 
         mView.showLoading();
 
-        mRecommendModel.getApps(new Callback<PageBean<AppInfo>>() {
+        mModel.getApps(new Callback<PageBean<AppInfo>>() {
             @Override
             public void onResponse(Call<PageBean<AppInfo>> call, Response<PageBean<AppInfo>> response) {
                 if(response != null){

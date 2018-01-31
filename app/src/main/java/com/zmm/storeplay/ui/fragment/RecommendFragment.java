@@ -1,18 +1,11 @@
 package com.zmm.storeplay.ui.fragment;
 
 import android.app.ProgressDialog;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.zmm.storeplay.AppApplication;
 import com.zmm.storeplay.R;
 import com.zmm.storeplay.bean.AppInfo;
 import com.zmm.storeplay.di.component.AppComponent;
@@ -28,8 +21,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class RecommendFragment extends BaseFragment<RecommendPresenter> implements RecomendContract.View{
 
