@@ -2,8 +2,10 @@ package com.zmm.storeplay.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.AppCompatActivity;
 
+import com.mikepenz.iconics.context.IconicsLayoutInflater2;
 import com.zmm.storeplay.AppApplication;
 import com.zmm.storeplay.di.component.AppComponent;
 import com.zmm.storeplay.presenter.BasePresenter;
@@ -31,6 +33,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        LayoutInflaterCompat.setFactory2(getLayoutInflater(), new IconicsLayoutInflater2(getDelegate()));
+
         super.onCreate(savedInstanceState);
 
         setContentView(setLayout());
