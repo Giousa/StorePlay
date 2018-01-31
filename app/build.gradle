@@ -55,5 +55,7 @@ dependencies {
     compile "com.google.dagger:dagger-android-support:2.11"
     annotationProcessor "com.google.dagger:dagger-android-processor:2.11"
 
+    //svg 欢迎界面
+    compile 'com.eftimoff:android-pathview:1.0.8@aar'
 
 }
