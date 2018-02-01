@@ -40,10 +40,6 @@ dependencies {
     //recyclerview
     compile 'com.android.support:recyclerview-v7:26.1.0'
 
-    //retrofit
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'org.ligboy.retrofit2:converter-fastjson-android:2.1.0'
-
     //picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
 
@@ -57,5 +53,16 @@ dependencies {
 
     //svg 欢迎界面
     compile 'com.eftimoff:android-pathview:1.0.8@aar'
+
+    //rxbinding2 里面已经包括了上面两个，所以不需要再次重复依赖rxjava
+    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+
+    //adapter-rxjava2 目的是将对象转为Oberverable
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+
+    //retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'org.ligboy.retrofit2:converter-fastjson-android:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
 
 }
