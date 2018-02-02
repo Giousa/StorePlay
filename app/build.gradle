@@ -55,6 +55,7 @@ dependencies {
     compile 'com.eftimoff:android-pathview:1.0.8@aar'
 
     //rxbinding2 里面已经包括了上面两个，所以不需要再次重复依赖rxjava
+//    compile "io.reactivex.rxjava2:rxjava:2.0.2"
     compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
 
     //adapter-rxjava2 目的是将对象转为Oberverable

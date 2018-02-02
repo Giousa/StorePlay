@@ -1,6 +1,7 @@
 package com.zmm.storeplay.data;
 
 import com.zmm.storeplay.bean.AppInfo;
+import com.zmm.storeplay.bean.BaseBean;
 import com.zmm.storeplay.bean.PageBean;
 import com.zmm.storeplay.data.http.ApiService;
 
@@ -34,7 +35,7 @@ public class RecommendModel {
 
 //        mApiService.getApps("{'page':0}").enqueue(callback);
 
-        Observable<PageBean<AppInfo>> observable = mApiService.getApps("{'page':0}");
-        return observable;
+        Observable<PageBean<AppInfo>> apps = mApiService.getApps("{'page':0}");
+        return apps;
     }
 }

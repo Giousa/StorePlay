@@ -1,6 +1,7 @@
 package com.zmm.storeplay.data.http;
 
 import com.zmm.storeplay.bean.AppInfo;
+import com.zmm.storeplay.bean.BaseBean;
 import com.zmm.storeplay.bean.PageBean;
 
 import io.reactivex.Observable;
@@ -24,4 +25,7 @@ public interface ApiService {
 
     @GET("featured")
     public Observable<PageBean<AppInfo>> getApps(@Query("p") String jsonParam);
+
+//    @GET("featured")
+//    Observable<BaseBean<PageBean<AppInfo>>> getApps(@Query("p") String jsonParam);
 }
