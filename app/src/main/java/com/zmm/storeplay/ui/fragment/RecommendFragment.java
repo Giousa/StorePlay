@@ -22,7 +22,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class RecommendFragment extends BaseFragment<RecommendPresenter> implements RecomendContract.View{
+public class RecommendFragment extends ProgressFragment<RecommendPresenter> implements RecomendContract.View{
 
 
     @BindView(R.id.recycler_view)
@@ -35,13 +35,26 @@ public class RecommendFragment extends BaseFragment<RecommendPresenter> implemen
     @Inject
     ProgressDialog mProgressDialog;
 
+
     @Override
-    protected int setLayout() {
+    public int setLayout() {
         return R.layout.fragment_recomend;
     }
 
+
+
     @Override
-    protected void setupActivityComponent(AppComponent appComponent) {
+    public void init() {
+        mPresenter.requestDatas();
+    }
+
+    @Override
+    public void onEmptyViewClick() {
+        mPresenter.requestDatas();
+    }
+
+    @Override
+    public void setupAcitivtyComponent(AppComponent appComponent) {
         DaggerRecommendComponent.builder()
                 .recommendModule(new RecommendModule(this))
                 .appComponent(appComponent)
@@ -49,10 +62,6 @@ public class RecommendFragment extends BaseFragment<RecommendPresenter> implemen
                 .inject(this);
     }
 
-    @Override
-    protected void init() {
-        mPresenter.requestDatas();
-    }
 
 
     private void initRecyclerView(List<AppInfo> datas) {
@@ -82,6 +91,7 @@ public class RecommendFragment extends BaseFragment<RecommendPresenter> implemen
             mProgressDialog.dismiss();
         }
     }
+
 
     @Override
     public void showResult(List<AppInfo> appInfos) {

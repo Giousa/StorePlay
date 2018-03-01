@@ -8,6 +8,7 @@ import com.zmm.storeplay.bean.BaseBean;
 import com.zmm.storeplay.bean.PageBean;
 import com.zmm.storeplay.common.rx.RxHttpResponseCompat;
 import com.zmm.storeplay.common.rx.subscriber.ProgressDialogSuscriber;
+import com.zmm.storeplay.common.rx.subscriber.ProgressSuscriber;
 import com.zmm.storeplay.data.RecommendModel;
 import com.zmm.storeplay.presenter.contract.RecomendContract;
 
@@ -132,10 +133,34 @@ public class RecommendPresenter extends BasePresenter<RecommendModel,RecomendCon
             activity = (Activity) mView;
         }
 
+//        mModel.getApps()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new ProgressDialogSuscriber<PageBean<AppInfo>>(activity) {
+//                    @Override
+//                    public void onNext(PageBean<AppInfo> response) {
+//                        if(response != null){
+//                            List<AppInfo> appInfos = response.getDatas();
+//
+//                            mView.showResult(appInfos);
+//                        }else {
+//                            mView.showNodata();
+//                        }
+//
+//                        mView.dismissLoading();
+//                    }
+//
+//                    //是否显示dialog
+//                    @Override
+//                    protected boolean isShowDialog() {
+//                        return true;
+//                    }
+//                });
+
         mModel.getApps()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ProgressDialogSuscriber<PageBean<AppInfo>>(activity) {
+                .subscribe(new ProgressSuscriber<PageBean<AppInfo>>(mView) {
                     @Override
                     public void onNext(PageBean<AppInfo> response) {
                         if(response != null){
@@ -147,12 +172,6 @@ public class RecommendPresenter extends BasePresenter<RecommendModel,RecomendCon
                         }
 
                         mView.dismissLoading();
-                    }
-
-                    //是否显示dialog
-                    @Override
-                    protected boolean isShowDialog() {
-                        return true;
                     }
                 });
 
