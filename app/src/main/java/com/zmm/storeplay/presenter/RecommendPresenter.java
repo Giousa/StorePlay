@@ -1,8 +1,10 @@
 package com.zmm.storeplay.presenter;
 
+import android.Manifest;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.zmm.storeplay.bean.AppInfo;
 import com.zmm.storeplay.bean.BaseBean;
 import com.zmm.storeplay.bean.PageBean;
@@ -19,10 +21,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.Subject;
 import retrofit2.Call;
@@ -157,14 +162,49 @@ public class RecommendPresenter extends BasePresenter<RecommendModel,RecomendCon
 //                    }
 //                });
 
-        mModel.getApps()
-                .subscribeOn(Schedulers.io())
+//        mModel.getApps()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new ProgressSuscriber<PageBean<AppInfo>>(mView) {
+//                    @Override
+//                    public void onNext(PageBean<AppInfo> response) {
+//                        if(response != null){
+//                            List<AppInfo> appInfos = response.getDatas();
+//
+//                            mView.showResult(appInfos);
+//                        }else {
+//                            mView.showNodata();
+//                        }
+//
+//                        mView.dismissLoading();
+//                    }
+//                });
+
+
+        RxPermissions rxPermissions = new RxPermissions(activity);
+        rxPermissions.request(Manifest.permission.READ_PHONE_STATE)
+                .flatMap(new Function<Boolean, Observable<PageBean<AppInfo>>>(){
+
+                    @Override
+                    public Observable<PageBean<AppInfo>> apply(Boolean aBoolean) throws Exception {
+
+                        System.out.println("aBoolean = "+aBoolean);
+                        if(aBoolean){
+                            return mModel.getApps().subscribeOn(Schedulers.io());
+                        }else {
+                            return Observable.empty();
+                        }
+                    }
+                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ProgressSuscriber<PageBean<AppInfo>>(mView) {
                     @Override
                     public void onNext(PageBean<AppInfo> response) {
+
+                        System.out.println("response = "+response);
                         if(response != null){
                             List<AppInfo> appInfos = response.getDatas();
+                            System.out.println("appInfos = "+appInfos);
 
                             mView.showResult(appInfos);
                         }else {
@@ -174,7 +214,6 @@ public class RecommendPresenter extends BasePresenter<RecommendModel,RecomendCon
                         mView.dismissLoading();
                     }
                 });
-
 
     }
 
