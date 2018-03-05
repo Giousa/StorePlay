@@ -3,10 +3,13 @@ package com.zmm.storeplay.data.http;
 import com.zmm.storeplay.bean.AppInfo;
 import com.zmm.storeplay.bean.BaseBean;
 import com.zmm.storeplay.bean.PageBean;
+import com.zmm.storeplay.bean.requestbean.LoginRequestBean;
 
 import io.reactivex.Observable;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -26,6 +29,19 @@ public interface ApiService {
     @GET("featured")
     public Observable<PageBean<AppInfo>> getApps(@Query("p") String jsonParam);
 
+
+    @GET("index")
+    public Observable<BaseBean<AppInfo>> index();
+
+
+    @GET("topList")
+    public Observable<BaseBean<AppInfo>> topList(@Query("page") int page);
+
+
+
 //    @GET("featured")
 //    Observable<BaseBean<PageBean<AppInfo>>> getApps(@Query("p") String jsonParam);
+
+    @POST("login")
+    public Observable<BaseBean> login(@Body LoginRequestBean requestBean);
 }

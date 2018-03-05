@@ -1,5 +1,7 @@
 package com.zmm.storeplay.di.component;
 
+import android.app.Application;
+
 import com.zmm.storeplay.data.http.ApiService;
 import com.zmm.storeplay.di.module.AppModule;
 import com.zmm.storeplay.di.module.HttpModule;
@@ -21,5 +23,7 @@ import dagger.Component;
 public interface AppComponent {
 
     public ApiService getApiService();
+
+    public Application getApplication();
 
 }
