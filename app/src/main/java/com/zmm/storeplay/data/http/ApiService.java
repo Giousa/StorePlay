@@ -2,6 +2,7 @@ package com.zmm.storeplay.data.http;
 
 import com.zmm.storeplay.bean.AppInfo;
 import com.zmm.storeplay.bean.BaseBean;
+import com.zmm.storeplay.bean.IndexBean;
 import com.zmm.storeplay.bean.PageBean;
 import com.zmm.storeplay.bean.requestbean.LoginRequestBean;
 
@@ -31,17 +32,12 @@ public interface ApiService {
 
 
     @GET("index")
-    public Observable<BaseBean<AppInfo>> index();
+    public Observable<BaseBean<IndexBean>> index();
 
 
-    @GET("topList")
-    public Observable<BaseBean<AppInfo>> topList(@Query("page") int page);
+    @GET("toplist")
+    public  Observable<BaseBean<PageBean<AppInfo>>> topList(@Query("page") int page);
 
-
-
-//    @GET("featured")
-//    Observable<BaseBean<PageBean<AppInfo>>> getApps(@Query("p") String jsonParam);
-
-    @POST("login")
-    public Observable<BaseBean> login(@Body LoginRequestBean requestBean);
+    @GET("game")
+    public  Observable<BaseBean<PageBean<AppInfo>>> games(@Query("page") int page);
 }

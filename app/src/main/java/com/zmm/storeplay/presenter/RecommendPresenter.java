@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.zmm.storeplay.bean.AppInfo;
 import com.zmm.storeplay.bean.BaseBean;
+import com.zmm.storeplay.bean.IndexBean;
 import com.zmm.storeplay.bean.PageBean;
 import com.zmm.storeplay.common.rx.RxHttpResponseCompat;
 import com.zmm.storeplay.common.rx.subscriber.ProgressDialogSuscriber;
@@ -181,36 +182,57 @@ public class RecommendPresenter extends BasePresenter<RecommendModel,RecomendCon
 //                });
 
 
-        RxPermissions rxPermissions = new RxPermissions(activity);
-        rxPermissions.request(Manifest.permission.READ_PHONE_STATE)
-                .flatMap(new Function<Boolean, Observable<PageBean<AppInfo>>>(){
+//        RxPermissions rxPermissions = new RxPermissions(activity);
+//        rxPermissions.request(Manifest.permission.READ_PHONE_STATE)
+//                .flatMap(new Function<Boolean, Observable<PageBean<AppInfo>>>(){
+//
+//                    @Override
+//                    public Observable<PageBean<AppInfo>> apply(Boolean aBoolean) throws Exception {
+//
+//                        System.out.println("aBoolean = "+aBoolean);
+//                        if(aBoolean){
+//                            return mModel.getApps().subscribeOn(Schedulers.io());
+//                        }else {
+//                            return Observable.empty();
+//                        }
+//                    }
+//                })
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new ProgressSuscriber<PageBean<AppInfo>>(mView) {
+//                    @Override
+//                    public void onNext(PageBean<AppInfo> response) {
+//
+//                        System.out.println("response = "+response);
+//                        if(response != null){
+//                            List<AppInfo> appInfos = response.getDatas();
+//                            System.out.println("appInfos = "+appInfos);
+//
+//                            mView.showResult(appInfos);
+//                        }else {
+//                            mView.showNodata();
+//                        }
+//
+//                        mView.dismissLoading();
+//                    }
+//                });
 
-                    @Override
-                    public Observable<PageBean<AppInfo>> apply(Boolean aBoolean) throws Exception {
-
-                        System.out.println("aBoolean = "+aBoolean);
-                        if(aBoolean){
-                            return mModel.getApps().subscribeOn(Schedulers.io());
-                        }else {
-                            return Observable.empty();
-                        }
-                    }
-                })
+        mModel.index()
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ProgressSuscriber<PageBean<AppInfo>>(mView) {
+                .subscribe(new ProgressSuscriber<BaseBean<IndexBean>>(mView) {
+
                     @Override
-                    public void onNext(PageBean<AppInfo> response) {
-
-                        System.out.println("response = "+response);
-                        if(response != null){
-                            List<AppInfo> appInfos = response.getDatas();
-                            System.out.println("appInfos = "+appInfos);
-
-                            mView.showResult(appInfos);
+                    public void onNext(BaseBean<IndexBean> value) {
+                        if(value != null){
+                            IndexBean indexBean = value.getData();
+                            if(indexBean != null){
+                                mView.showResult(indexBean);
+                            }else {
+                                mView.showNodata();
+                            }
                         }else {
                             mView.showNodata();
                         }
-
                         mView.dismissLoading();
                     }
                 });

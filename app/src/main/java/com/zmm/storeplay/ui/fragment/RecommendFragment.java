@@ -1,22 +1,19 @@
 package com.zmm.storeplay.ui.fragment;
 
 import android.app.ProgressDialog;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.zmm.storeplay.R;
-import com.zmm.storeplay.bean.AppInfo;
+import com.zmm.storeplay.bean.IndexBean;
 import com.zmm.storeplay.di.component.AppComponent;
 import com.zmm.storeplay.di.component.DaggerRecommendComponent;
 import com.zmm.storeplay.di.module.RecommendModule;
 import com.zmm.storeplay.presenter.RecommendPresenter;
 import com.zmm.storeplay.presenter.contract.RecomendContract;
-import com.zmm.storeplay.ui.adapter.RecomendAppAdatper;
+import com.zmm.storeplay.ui.adapter.IndexMultipleAdapter;
 import com.zmm.storeplay.ui.decoration.DividerItemDecoration;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -30,7 +27,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
 
 
-    private RecomendAppAdatper mRecomendAppAdatper;
+    private IndexMultipleAdapter mAdatper;
 
     @Inject
     ProgressDialog mProgressDialog;
@@ -38,13 +35,15 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
     @Override
     public int setLayout() {
-        return R.layout.fragment_recomend;
+        return R.layout.template_recycler_view;
     }
 
 
 
     @Override
     public void init() {
+
+        initRecycleView();
         mPresenter.requestDatas();
     }
 
@@ -64,19 +63,12 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
 
 
-    private void initRecyclerView(List<AppInfo> datas) {
+    private void initRecycleView() {
         //为RecyclerView设置布局管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //为RecyclerView设置分割线(这个可以对DividerItemDecoration进行修改，自定义)
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL_LIST));
-
-        //动画
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        mRecomendAppAdatper = new RecomendAppAdatper(getActivity(), datas);
-
-        mRecyclerView.setAdapter(mRecomendAppAdatper);
 
     }
 
@@ -94,8 +86,13 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
 
     @Override
-    public void showResult(List<AppInfo> appInfos) {
-        initRecyclerView(appInfos);
+    public void showResult(IndexBean indexBean) {
+
+        mAdatper = new IndexMultipleAdapter(getActivity());
+        mAdatper.setData(indexBean);
+
+        mRecyclerView.setAdapter(mAdatper);
+
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.zmm.storeplay.data;
 
 import com.zmm.storeplay.bean.AppInfo;
 import com.zmm.storeplay.bean.BaseBean;
+import com.zmm.storeplay.bean.IndexBean;
 import com.zmm.storeplay.bean.PageBean;
 import com.zmm.storeplay.data.http.ApiService;
 
@@ -37,5 +38,21 @@ public class RecommendModel {
 
         Observable<PageBean<AppInfo>> apps = mApiService.getApps("{'page':0}");
         return apps;
+    }
+
+    public Observable<BaseBean<IndexBean>> index(){
+
+        return  mApiService.index();
+    }
+
+
+    public  Observable<BaseBean<PageBean<AppInfo>>> topList(int page){
+
+        return  mApiService.topList(page);
+    }
+
+    public  Observable<BaseBean<PageBean<AppInfo>>> games(int page){
+
+        return  mApiService.games(page);
     }
 }
