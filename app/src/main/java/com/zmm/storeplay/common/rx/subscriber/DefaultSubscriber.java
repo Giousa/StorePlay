@@ -2,7 +2,6 @@ package com.zmm.storeplay.common.rx.subscriber;
 
 
 import io.reactivex.Observer;
-
 /**
  * Description:
  * Author:zhangmengmeng
@@ -11,4 +10,5 @@ import io.reactivex.Observer;
  */
 
 public abstract class DefaultSubscriber<T> implements Observer<T> {
+
 }

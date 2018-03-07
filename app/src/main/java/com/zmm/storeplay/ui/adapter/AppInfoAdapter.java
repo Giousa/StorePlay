@@ -1,5 +1,6 @@
 package com.zmm.storeplay.ui.adapter;
 
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,24 +25,28 @@ import java.util.List;
 
 public class AppInfoAdapter extends BaseQuickAdapter<AppInfo,BaseViewHolder> {
 
+
+
     String baseImgUrl ="http://file.market.xiaomi.com/mfc/thumbnail/png/w150q80/";
 
-
-    private Builder mBuilder;
-
-    private AppInfoAdapter(Builder builder) {
+    public AppInfoAdapter() {
         super(R.layout.template_appinfo);
-
-        this.mBuilder = builder;
-
-        openLoadAnimation();
     }
 
+//    private Builder mBuilder;
 
-    public static Builder builder(){
+//    private AppInfoAdapter(Builder builder) {
+//        super(R.layout.template_appinfo);
+//
+//        this.mBuilder = builder;
+//
+//        openLoadAnimation();
+//    }
 
-        return new Builder();
-    }
+//    public static Builder builder(){
+//
+//        return new Builder();
+//    }
     @Override
     protected void convert(BaseViewHolder helper, AppInfo item) {
 
@@ -51,72 +56,82 @@ public class AppInfoAdapter extends BaseQuickAdapter<AppInfo,BaseViewHolder> {
                 .setText(R.id.txt_brief,item.getBriefShow());
 
 
+//        TextView txtViewPosition = helper.getView(R.id.txt_position);
+//        txtViewPosition.setVisibility(mBuilder.isShowPosition?View.VISIBLE:View.GONE);
+//        txtViewPosition.setText(item.getPosition()+1 +". ");
+//
+//        TextView txtViewCategory = helper.getView(R.id.txt_category);
+//        txtViewCategory.setVisibility(mBuilder.isShowCategoryName?View.VISIBLE:View.GONE);
+//        txtViewCategory.setText(item.getLevel1CategoryName());
+//
+//        TextView txtViewBrief = helper.getView(R.id.txt_brief);
+//        txtViewBrief.setVisibility(mBuilder.isShowBrief?View.VISIBLE:View.GONE);
+//        txtViewBrief.setText(item.getBriefShow());
+
         TextView txtViewPosition = helper.getView(R.id.txt_position);
-        txtViewPosition.setVisibility(mBuilder.isShowPosition?View.VISIBLE:View.GONE);
         txtViewPosition.setText(item.getPosition()+1 +". ");
 
         TextView txtViewCategory = helper.getView(R.id.txt_category);
-        txtViewCategory.setVisibility(mBuilder.isShowCategoryName?View.VISIBLE:View.GONE);
         txtViewCategory.setText(item.getLevel1CategoryName());
 
         TextView txtViewBrief = helper.getView(R.id.txt_brief);
-        txtViewBrief.setVisibility(mBuilder.isShowBrief?View.VISIBLE:View.GONE);
         txtViewBrief.setText(item.getBriefShow());
 
 
 
-    }
-
-
-
-
-
-
-    public static class  Builder{
-
-
-
-
-        private boolean isShowPosition;
-        private boolean isShowCategoryName;
-        private boolean isShowBrief;
-
-
-
-
-
-
-        public Builder showPosition(boolean b){
-
-            this.isShowPosition =b;
-            return this;
-        }
-
-
-        public Builder showCategoryName(boolean b){
-
-            this.isShowCategoryName =b;
-            return this;
-        }
-
-
-        public Builder showBrief(boolean b){
-
-            this.isShowBrief =b;
-            return this;
-        }
-
-        public AppInfoAdapter build(){
-
-
-            return  new AppInfoAdapter(this);
-        }
-
-
-
-
 
     }
+
+
+
+
+
+
+//    public static class  Builder{
+//
+//
+//
+//
+//        private boolean isShowPosition;
+//        private boolean isShowCategoryName;
+//        private boolean isShowBrief;
+//
+//
+//
+//
+//
+//
+//        public Builder showPosition(boolean b){
+//
+//            this.isShowPosition =b;
+//            return this;
+//        }
+//
+//
+//        public Builder showCategoryName(boolean b){
+//
+//            this.isShowCategoryName =b;
+//            return this;
+//        }
+//
+//
+//        public Builder showBrief(boolean b){
+//
+//            this.isShowBrief =b;
+//            return this;
+//        }
+//
+//        public AppInfoAdapter build(){
+//
+//
+//            return  new AppInfoAdapter(this);
+//        }
+//
+//
+//
+//
+//
+//    }
 
 
 

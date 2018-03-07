@@ -139,9 +139,8 @@ public class IndexMultipleAdapter extends RecyclerView.Adapter<RecyclerView.View
         else {
             AppViewHolder viewHolder = (AppViewHolder) holder;
 
-
-
-            AppInfoAdapter appInfoAdapter =  AppInfoAdapter.builder().showBrief(true).showCategoryName(false).showPosition(false).build();
+//            AppInfoAdapter appInfoAdapter =  AppInfoAdapter.builder().showBrief(true).showCategoryName(false).showPosition(false).build();
+            AppInfoAdapter appInfoAdapter =  new AppInfoAdapter();
 
             if(viewHolder.type==TYPE_APPS){
                 viewHolder.mText.setText("热门应用");
@@ -233,6 +232,7 @@ public class IndexMultipleAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         private void initRecyclerView() {
 
+            //此方法，禁止滚动
             mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext) {
 
                 @Override

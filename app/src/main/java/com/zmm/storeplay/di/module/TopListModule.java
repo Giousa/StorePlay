@@ -19,33 +19,23 @@ import dagger.Provides;
  */
 
 @Module
-public class RecommendModule {
+public class TopListModule {
 
-    private AppInfoContract.View mView;
+    private AppInfoContract.TopListView mView;
 
-    public RecommendModule(AppInfoContract.View view) {
+    public TopListModule(AppInfoContract.TopListView view) {
         this.mView = view;
     }
 
     @Provides
-    public AppInfoContract.View provideRecommendView(){
+    public AppInfoContract.TopListView provideView(){
 
         return mView;
     }
 
-
     @Provides
-    public RecommendPresenter provideRecommendPresenter(AppInfoModel recommendModel, AppInfoContract.View view){
-        return new RecommendPresenter(recommendModel,view);
-    }
-
-    @Provides
-    public ProgressDialog provideProgressDialog(AppInfoContract.View view){
-        return new ProgressDialog(((RecommendFragment)view).getActivity());
-    }
-
-    @Provides
-    public AppInfoModel provideRecommendModel(ApiService apiService){
+    public AppInfoModel provideModel(ApiService apiService){
         return new AppInfoModel(apiService);
     }
+
 }

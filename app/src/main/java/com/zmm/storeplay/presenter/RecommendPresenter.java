@@ -1,39 +1,16 @@
 package com.zmm.storeplay.presenter;
 
-import android.Manifest;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 
-import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.zmm.storeplay.bean.AppInfo;
 import com.zmm.storeplay.bean.BaseBean;
 import com.zmm.storeplay.bean.IndexBean;
-import com.zmm.storeplay.bean.PageBean;
-import com.zmm.storeplay.common.rx.RxHttpResponseCompat;
-import com.zmm.storeplay.common.rx.subscriber.ProgressDialogSuscriber;
 import com.zmm.storeplay.common.rx.subscriber.ProgressSuscriber;
-import com.zmm.storeplay.data.RecommendModel;
-import com.zmm.storeplay.presenter.contract.RecomendContract;
+import com.zmm.storeplay.data.AppInfoModel;
+import com.zmm.storeplay.presenter.contract.AppInfoContract;
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
-import java.util.List;
-
-import javax.inject.Inject;
-
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.ObservableTransformer;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.Subject;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Description:
@@ -42,10 +19,10 @@ import retrofit2.Response;
  * Time:下午5:57
  */
 
-public class RecommendPresenter extends BasePresenter<RecommendModel,RecomendContract.View> {
+public class RecommendPresenter extends BasePresenter<AppInfoModel,AppInfoContract.View> {
 
 
-    public RecommendPresenter(RecommendModel model, RecomendContract.View view) {
+    public RecommendPresenter(AppInfoModel model, AppInfoContract.View view) {
         super(model, view);
     }
 

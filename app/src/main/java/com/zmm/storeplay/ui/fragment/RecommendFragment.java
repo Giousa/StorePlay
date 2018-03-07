@@ -11,7 +11,7 @@ import com.zmm.storeplay.di.component.AppComponent;
 import com.zmm.storeplay.di.component.DaggerRecommendComponent;
 import com.zmm.storeplay.di.module.RecommendModule;
 import com.zmm.storeplay.presenter.RecommendPresenter;
-import com.zmm.storeplay.presenter.contract.RecomendContract;
+import com.zmm.storeplay.presenter.contract.AppInfoContract;
 import com.zmm.storeplay.ui.adapter.IndexMultipleAdapter;
 import com.zmm.storeplay.ui.decoration.DividerItemDecoration;
 
@@ -19,7 +19,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class RecommendFragment extends ProgressFragment<RecommendPresenter> implements RecomendContract.View{
+public class RecommendFragment extends ProgressFragment<RecommendPresenter> implements AppInfoContract.View{
 
 
     @BindView(R.id.recycler_view)

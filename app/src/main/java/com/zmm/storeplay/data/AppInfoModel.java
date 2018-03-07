@@ -18,11 +18,11 @@ import retrofit2.Callback;
  * Time:下午9:05
  */
 
-public class RecommendModel {
+public class AppInfoModel {
 
     private ApiService mApiService;
 
-    public RecommendModel(ApiService apiService) {
+    public AppInfoModel(ApiService apiService) {
         mApiService = apiService;
     }
 

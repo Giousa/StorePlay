@@ -1,6 +1,8 @@
 package com.zmm.storeplay.presenter.contract;
 
+import com.zmm.storeplay.bean.AppInfo;
 import com.zmm.storeplay.bean.IndexBean;
+import com.zmm.storeplay.bean.PageBean;
 import com.zmm.storeplay.ui.BaseView;
 
 
@@ -11,7 +13,7 @@ import com.zmm.storeplay.ui.BaseView;
  * Time:下午5:52
  */
 
-public interface RecomendContract {
+public interface AppInfoContract {
 
     interface View extends BaseView {
         void showResult(IndexBean indexBean);
@@ -19,4 +21,11 @@ public interface RecomendContract {
         void showError();
     }
 
+
+    interface TopListView extends BaseView{
+        void showResult(PageBean<AppInfo> data);
+
+        void onLoadMoreComplete();
+
+    }
 }
